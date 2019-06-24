@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import com.geolocation.model.GeoIP;
 import com.maxmind.geoip2.DatabaseReader;
@@ -17,7 +19,8 @@ public class GeoLocationService {
 	private DatabaseReader databaseReader;
 	
 	public GeoLocationService() throws IOException {
-		File database = new File("YOUR_GEOLOCATION_DATABASE_HERE");
+		
+		File database =  new ClassPathResource("/geo-location-db/GeoLite2-City.mmdb").getFile();
 		databaseReader = new DatabaseReader.Builder(database).build();
     }
 	
